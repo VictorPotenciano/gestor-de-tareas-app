@@ -36,7 +36,7 @@ const PasswordForm = ({ handleCancel, setMode }: PasswordFormProps) => {
     }
     try {
       const response = await changePassword(data.newPassword);
-      console.log(response);
+      
       if (response?.error) {
         setError(response.error);
       } else {

@@ -29,7 +29,6 @@ const Page = () => {
     }
     try {
       const response = await registerUser(data.name, data.email, data.password);
-      console.log(response);
       if (response?.error) {
         setError(response.error);
       } else {

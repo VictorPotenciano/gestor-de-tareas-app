@@ -49,14 +49,13 @@ const DialogForm = ({
     try {
       if (!session?.user?.id) return;
 
-      const response = await updateUser(
+      await updateUser(
         Number(session.user.id),
         data.name,
         data.email
       );
 
-      console.log(response);
-      const user = await update({
+       await update({
         ...session,
         user: {
           ...session.user,
@@ -64,7 +63,6 @@ const DialogForm = ({
           email: data.email,
         },
       });
-      console.log(user);
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating user:", error);

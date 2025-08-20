@@ -16,7 +16,6 @@ const Page = () => {
   const [error, setError] = useState<string | null>(null);
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,
@@ -27,9 +26,7 @@ const Page = () => {
     } else {
       router.push("/");
     }
-    console.log(res);
   });
-  console.log(errors);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">

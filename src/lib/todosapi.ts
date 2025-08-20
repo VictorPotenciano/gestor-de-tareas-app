@@ -13,7 +13,6 @@ const api = axios.create({
 export async function getTodos() {
   try {
     const response = await api.get("/todos");
-    console.log("Response data:", response.data);
     return response.data;
   } catch (error) {
     if (!axios.isCancel(error)) {
