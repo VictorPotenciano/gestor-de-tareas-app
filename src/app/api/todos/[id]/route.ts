@@ -3,11 +3,10 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-interface Params {
-  params: { id: string };
-}
-
-export async function GET(request: Request, { params }: Params) {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
     return NextResponse.json(
@@ -55,7 +54,10 @@ export async function GET(request: Request, { params }: Params) {
   }
 }
 
-export async function PUT(request: Request, { params }: Params) {
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
     return NextResponse.json(
@@ -64,10 +66,11 @@ export async function PUT(request: Request, { params }: Params) {
     );
   }
   const userId = parseInt(session.user.id);
+  const { id } = await params;
   try {
     const todo = await prisma.todo.findUnique({
       where: {
-        id: Number(params.id),
+        id: Number(id),
       },
     });
     if (!todo)
@@ -79,7 +82,7 @@ export async function PUT(request: Request, { params }: Params) {
     const { title, content, categoryId } = await request.json();
     const todoUpdated = await prisma.todo.update({
       where: {
-        id: Number(params.id),
+        id: Number(id),
       },
       data: {
         title,
@@ -110,7 +113,10 @@ export async function PUT(request: Request, { params }: Params) {
   }
 }
 
-export async function DELETE(request: Request, { params }: Params) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
     return NextResponse.json(
@@ -118,10 +124,11 @@ export async function DELETE(request: Request, { params }: Params) {
       { status: 401 }
     );
   }
+  const { id } = await params;
   try {
     const todo = await prisma.todo.findUnique({
       where: {
-        id: Number(params.id),
+        id: Number(id),
       },
     });
     if (!todo) {
@@ -132,7 +139,7 @@ export async function DELETE(request: Request, { params }: Params) {
     }
     const deleteTodo = await prisma.todo.delete({
       where: {
-        id: Number(params.id),
+        id: Number(id),
       },
     });
     return NextResponse.json(deleteTodo);

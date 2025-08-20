@@ -3,11 +3,10 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-interface Params {
-  params: Promise<{ id: string }>;
-}
-
-export async function PUT(request: Request, { params }: Params) {
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
     return NextResponse.json(
