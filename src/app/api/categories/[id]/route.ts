@@ -15,7 +15,7 @@ export async function GET(request: Request, { params }: Params) {
       { status: 401 }
     );
   }
-  const { id } = await params;
+  const { id } = params;
   try {
     const category = await prisma.category.findUnique({
       where: {
