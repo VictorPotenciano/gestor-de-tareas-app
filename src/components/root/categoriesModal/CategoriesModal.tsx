@@ -55,15 +55,16 @@ const CategoriesModal = ({
                   columns={columns}
                 />
               </div>
-              <div className="flex justify-end mt-4">
+              {categories.length === 0 && <EmptyCategoriesModal />}
+              <div className="flex justify-center mt-4">
                 <Button
                   onClick={handleCreateCategory}
-                  className="bg-amber-500 text-white cursor-pointer"
+                  variant="outline"
+                  className="text-green-700 border-green-200 hover:bg-green-50 cursor-pointer"
                 >
                   Crear Categoría
                 </Button>
               </div>
-              {categories.length === 0 && <EmptyCategoriesModal />}
             </>
           ) : (
             <div className="rounded-xl border border-green-200 p-8 bg-green-25 shadow-sm">

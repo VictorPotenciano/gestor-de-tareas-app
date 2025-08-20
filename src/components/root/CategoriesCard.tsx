@@ -42,11 +42,24 @@ const CategoriesCard = ({
 
       {/* Carousel */}
       <div className="p-4 sm:p-6">
-        <CategoriesCarousel
-          categories={categories}
-          selectedCategoryId={selectedCategoryId}
-          handleCategoryClick={handleCategoryClick}
-        />
+        {categories.length === 0 ? (
+          <div className="text-center">
+            <p className="text-gray-500 mb-4">No hay categorías disponibles</p>
+            <Button
+              onClick={() => setIsCategoriesModalOpen(true)}
+              variant="outline"
+              className="text-green-700 border-green-200 hover:bg-green-50 cursor-pointer"
+            >
+              Crear categoría
+            </Button>
+          </div>
+        ) : (
+          <CategoriesCarousel
+            categories={categories}
+            selectedCategoryId={selectedCategoryId}
+            handleCategoryClick={handleCategoryClick}
+          />
+        )}
       </div>
     </div>
   );

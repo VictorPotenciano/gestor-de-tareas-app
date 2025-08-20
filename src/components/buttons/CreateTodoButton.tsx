@@ -8,7 +8,8 @@ const CreateTodoButton = ({ setIsModalOpen }: CreateTodoButtonProps) => {
   return (
     <Button
       onClick={() => setIsModalOpen(true)}
-      className="bg-amber-400 text-white hover:bg-amber-500 hover:text-white hover:border hover:border-amber-500 cursor-pointer"
+      variant="outline"
+      className="text-green-700 border-green-200 hover:bg-green-50 cursor-pointer"
     >
       Crear Tarea
     </Button>
