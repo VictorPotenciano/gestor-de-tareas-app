@@ -1,6 +1,6 @@
-import { Category, Todo, TodoFormData } from "../../../typing";
 import { SubmitHandler } from "react-hook-form";
 import TodoModalForm from "./TodoModalForm";
+import { Category, Todo, TodoFormData } from "../../../../typing";
 
 interface TodoModalProps {
   closeModal: () => void;
